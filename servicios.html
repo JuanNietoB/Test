@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="fav_256_01.png">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <title>Almacenamiento Electrico Latam</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f9f4;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #007f5f;
+      color: white;
+      padding: 1em 2em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1em;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .hero {
+      background: url('https://source.unsplash.com/1600x600/?renewable-energy') no-repeat center center/cover;
+      color: black;
+      padding: 5em 2em;
+      text-align: center;
+
+    }
+
+    .section {
+      padding: 4em 2em;
+      max-width: 900px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section ul {
+      list-style: none;
+      padding-left: 1em;
+    }
+
+    .section li {
+      margin-bottom: 0.5em;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+
+    input,
+    textarea {
+      padding: 0.8em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: #007f5f;
+      color: white;
+      padding: 1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    button:hover {
+      background-color: #005f46;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1em;
+      background: #e0e0e0;
+      color: #333;
+    }
+
+    .logo-hero {
+
+      width: 460px;
+      height: auto;
+      margin-top: 1em;
+      /* opcional: espacio con el texto */
+    }
+
+    /* Estilos para el dropdown */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 200px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 4px;
+    }
+
+    .dropdown-content a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #e9e9e9;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown:hover>a {
+      background-color: #2bab8b;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="Logo5.png" alt="Logo Almacenamiento Eléctrico Latam" class="logo">
+    <h1> Almacenamiento Electrico Latam</h1>
+    <nav>
+      <ul>
+        <li class="dropdown"> <a href="pagina_01_Prueba.html">Inicio</a></li>
+        <li class="dropdown"> <a href="servicios.html">Servicios</a></li>
+        <li class="dropdown"> <a href="Reportes.html">Reportes</a></li>
+        <li class="dropdown"> <a href="sobre_nosotros.html">Sobre Nosotros</a></li>
+        <li class="dropdown"> <a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <style>
+    .logo {
+      width: 60px;
+      height: 60px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+  </style>
+
+
+  <section id="servicios" class="section">
+    <h2>Servicios</h2>
+    <ul>
+      <li>🔍 Análisis de Datos Energéticos</li>
+      <li>📊 Visualización de KPIs de generación</li>
+      <li>💡 Modelado de predicción solar/eólica</li>
+      <li>📈 Optimización de almacenamiento con baterías</li>
+    </ul>
+  </section>
+
+
+
+
+  <section id="grafico" class="section">
+    <h2 style="text-align: center;">Capacidad de Almacenamiento de Baterías en México 2025</h2>
+    <canvas id="energiaChart" width="400" height="200"></canvas>
+  </section>
+
+
+
+  <script>
+    const ctx = document.getElementById('energiaChart').getContext('2d');
+    const energiaChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Baja California', 'San Luis Potosi', 'Sonora', 'Quinta Roo'],
+        datasets: [{
+          label: 'Capacidad Instalada (MW)',
+          data: [60.5, 20, 12, 3],
+          backgroundColor: ['#f4a261', '#2a9d8f', '#264653', '#8d99ae']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              usePointStyle: true,
+              pointStyle: 'line', // o 'circle', 'rect', etc. Usa 'line' o 'false' para que no sea un cuadro.
+              color: '#333', // opcional: color del texto
+              boxWidth: 0 // oculta completamente el recuadro
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
+
+  <footer>
+    <p>&copy; 2025 Almacenamiento Eléctrico Latam. Todos los derechos reservados.</p>
+    <div class="social-links">
+      <a href="https://www.facebook.com/EnergyStorageLatam" target="_blank" aria-label="Facebook">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="24">
+      </a>
+      <a href="https://www.linkedin.com/company/almacenamiento-el%C3%A9ctrico-latam/?viewAsMember=true" target="_blank"
+        aria-label="LinkedIn">
+        <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn" width="24">
+      </a>
+    </div>
+  </footer>
+
+
+  <script>
+    // Animación al hacer scroll
+    const sections = document.querySelectorAll('.section');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ site.data.brand.brand.name }}</title>
+  <style>
+    body {
+      background-color: {{ site.data.brand.colors.background }};
+      color: {{ site.data.brand.colors.text }};
+      font-family: {{ site.data.brand.fonts.body }};
+    }
+    h1 {
+      font-family: {{ site.data.brand.fonts.heading }};
+      color: {{ site.data.brand.colors.primary }};
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="{{ site.data.brand.brand.logo4 }}" alt="Logo de {{ site.data.brand.brand.name }}" width="150">
+    <h1>{{ site.data.brand.brand.name }}</h1>
+    <p>{{ site.data.brand.brand.tagline }}</p>
+  </header>
+</body>
+</html>

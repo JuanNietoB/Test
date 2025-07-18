@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="fav_256_01.png">
+    <title>Almacenamiento Electrico Latam</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f9f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #007f5f;
+            color: white;
+            padding: 1em 2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1em;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .hero {
+            background: url('https://source.unsplash.com/1600x600/?renewable-energy') no-repeat center center/cover;
+            color: black;
+            padding: 5em 2em;
+            text-align: center;
+
+        }
+
+        .section {
+            padding: 4em 2em;
+            max-width: 900px;
+            margin: auto;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section ul {
+            list-style: none;
+            padding-left: 1em;
+        }
+
+        .section li {
+            margin-bottom: 0.5em;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+
+        input,
+        textarea {
+            padding: 0.8em;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        button {
+            background-color: #007f5f;
+            color: white;
+            padding: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        button:hover {
+            background-color: #005f46;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em;
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .logo-hero {
+
+            width: 460px;
+            height: auto;
+            margin-top: 1em;
+            /* opcional: espacio con el texto */
+        }
+
+        /* Estilos para el dropdown */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 4px;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #e9e9e9;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover>a {
+            background-color: #2bab8b;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <header>
+        <img src="Logo5.png" alt="Logo Almacenamiento Eléctrico Latam" class="logo">
+        <h1> Almacenamiento Electrico Latam</h1>
+        <nav>
+            <ul>
+                <li class="dropdown"> <a href="pagina_01_Prueba.html">Inicio</a></li>
+                <li class="dropdown"> <a href="servicios.html">Servicios</a></li>
+                <li class="dropdown"> <a href="Reportes.html">Reportes</a></li>
+                <li class="dropdown"> <a href="sobre_nosotros.html">Sobre Nosotros</a></li>
+                <li class="dropdown"> <a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header> -->
+
+
+    <!-- Barra superior -->
+    <header class="bg-green-900 text-white p-4">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center">
+                <img src="Logo5.png" alt="Logo Almacenamiento Eléctrico Latam" class="logo">
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold">Almacenamiento Eléctrico LATAM</h1>
+                    <p class="text-xs md:text-sm"></p>
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-2">
+                <!-- <a href="#" class="bg-white text-blue-900 px-4 py-2 rounded font-medium text-center">Open Live View</a> -->
+                <a href="Contacto_01.html"
+                    class="border border-white px-4 py-2 rounded font-medium text-center">Contacto</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Barra de navegación -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto flex flex-wrap justify-center gap-1 p-2">
+
+            <a href="index.html"
+                class="px-4 py-2 font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md">
+                Inicio
+            </a>
+
+            <a href="sobre_nosotros_01.html"
+                class="px-4 py-2 font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md">
+                Sobre nosotros
+            </a>
+
+            <!-- Menú Product -->
+            <div class="dropdown relative">
+                <button
+                    class="px-4 py-2 font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md flex items-center">
+                    Servicios
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-chart-line mr-2"></i> Graficas
+                        <!-- </a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-tachometer-alt mr-2"></i>w
+                    </a> -->
+                        <a href="Reporte_01.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-trophy mr-2"></i> Reportes
+                        </a>
+                        <!-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-map-marked-alt mr-2"></i> Balancing Authority Map
+                    </a> -->
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-database mr-2"></i> Base de datos
+                        </a>
+                        <!-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-bell mr-2"></i> Noticias
+                        </a> -->
+                        <!-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-search mr-2"></i> Buscar
+                        </a> -->
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <!-- <i class="fas fa-book mr-2"></i> Data Catalog -->
+                        </a>
+                </div>
+            </div>
+
+            <!-- Menú Live
+            <a href="#" class="px-4 py-2 font-medium text-blue-600 hover:bg-gray-100 rounded-md">
+                Live
+            </a> -->
+
+            <!-- Menú Price Map -->
+            <!-- <div class="dropdown relative">
+                <button
+                    class="px-4 py-2 font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md flex items-center">
+                    Tendencias
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-map mr-2"></i> Regional View
+                    </a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-bolt mr-2"></i> Nodal Prices
+                    </a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-history mr-2"></i> Historical Trends
+                    </a>
+                </div>
+            </div> -->
+
+            <!-- Menú Dashboards -->
+
+
+            <!-- Menú Alerts -->
+            <!-- <div class="dropdown relative">
+                <button
+                    class="px-4 py-2 font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md flex items-center">
+                    Alerts
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-exclamation-triangle mr-2"></i> Price Alerts
+                    </a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-chart-bar mr-2"></i> Load Alerts
+                    </a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-bolt mr-2"></i> Outage Alerts
+                    </a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-cog mr-2"></i> Alert Settings
+                    </a>
+                </div>
+            </div> -->
+
+            <!-- Menú Record Tracker
+            <a href="#" class="px-4 py-2 font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md">
+                Record Tracker
+            </a>
+
+            < Menú Graph Builder -->
+            <!-- <a href="#" class="px-4 py-2 font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md">
+                Graph Builder
+            </a> -->
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+    <style>
+        .logo {
+            width: 60px;
+            height: 60px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+    </style>
+
+
+    <!-- <section id="servicios" class="section">
+        <h2>Servicios</h2>
+        <ul>
+            <li>🔍 Análisis de Datos Energéticos</li>
+            <li>📊 Visualización de KPIs de generación</li>
+            <li>💡 Modelado de predicción solar/eólica</li>
+            <li>📈 Optimización de almacenamiento con baterías</li>
+        </ul>
+    </section> -->
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .pdf-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #d33;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border: 2px solid #d33;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            background-color: #fff;
+        }
+
+        .pdf-download:hover {
+            background-color: #f8f8f8;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .pdf-download i {
+            font-size: 1.2em;
+        }
+    </style>
+
+    <div class="download-container">
+        <a href="documento.pdf" class="pdf-download" download>
+            <i class="fas fa-file-pdf"></i> Descargar documento
+        </a>
+    </div>
+
+    <style>
+        .download-container {
+            display: flex;
+            justify-content: flex-end;
+            /* Alinea a la derecha */
+            padding: 10px;
+            /* Espacio alrededor */
+        }
+    </style>
+
+
+    <!-- <section id="grafico" class="section">
+        <h2 style="text-align: center;">Capacidad de Almacenamiento de Baterías en México 2025</h2>
+        <canvas id="energiaChart" width="400" height="200"></canvas>
+    </section>
+
+    <section id="grafico2" class="section">
+        <h2 style="text-align: center;">Capacidad de Almacenamiento de Baterías en Chile 2025</h2>
+        <canvas id="energiaChart2" width="400" height="200"></canvas>
+    </section>
+
+
+    <script>
+        const ctx = document.getElementById('energiaChart').getContext('2d');
+        const energiaChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Baja California', 'San Luis Potosi', 'Sonora', 'Quinta Roo'],
+                datasets: [{
+                    label: 'Capacidad Instalada (MW)',
+                    data: [60.5, 20, 12, 3],
+                    backgroundColor: ['#f4a261', '#2a9d8f', '#264653', '#8d99ae']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            usePointStyle: true,
+                            pointStyle: 'line', // o 'circle', 'rect', etc. Usa 'line' o 'false' para que no sea un cuadro.
+                            color: '#333', // opcional: color del texto
+                            boxWidth: 0 // oculta completamente el recuadro
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+    </script>
+
+
+
+    <script>
+        const ctx2 = document.getElementById('energiaChart2').getContext('2d');
+        const energiaChart2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Bess el desierto', 'San Luis Potosi', 'Sonora', 'Quinta Roo'],
+                datasets: [{
+                    label: 'Capacidad Instalada (MW)',
+                    data: [60.5, 20, 12, 3],
+                    backgroundColor: ['#f4a261', '#2a9d8f', '#264653', '#8d99ae']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            usePointStyle: true,
+                            pointStyle: 'line', // o 'circle', 'rect', etc. Usa 'line' o 'false' para que no sea un cuadro.
+                            color: '#333', // opcional: color del texto
+                            boxWidth: 0 // oculta completamente el recuadro
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+    </script> -->
+
+
+
+
+
+
+    <section id="grafico" class="section">
+        <h2 style="text-align: center; font-size: 28px;">Capacidad de Almacenamiento de Baterías en México 2025</h2>
+        <canvas id="energiaChart" width="400" height="200"></canvas>
+    </section>
+
+    <section id="grafico2" class="section">
+        <h2 style="text-align: center; font-size: 28px;">Chile lidera el almacenamiento en baterías en LATAM a 2025 con
+            1.3 GW de capacidad total instalada. En la actualidad, algunos de los proyectos más grandes de Chile
+            son:</h2>
+        <canvas id="energiaChart2" width="400" height="200"></canvas>
+    </section>
+
+    <section id="grafico3" class="section">
+        <h2 style="text-align: center; font-size: 28px;">Capacidad de Toal de Almacenamiento de Baterías 8 MW en
+            Colombia a 2025</h2>
+        <canvas id="energiaChart3" width="400" height="200"></canvas>
+    </section>
+
+    <script>
+        // Función para crear gráficas de forma reutilizable
+        function crearGrafica(idCanvas, labels, datos, titulo, color) {
+            const ctx = document.getElementById(idCanvas).getContext('2d');
+            return new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: titulo,
+                        data: datos,
+                        backgroundColor: color
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                usePointStyle: true,
+                                pointStyle: 'line',
+                                color: '#333',
+                                boxWidth: 0
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Gráfica para México
+        crearGrafica(
+            'energiaChart',
+            ['Baja California', 'San Luis Potosi', 'Sonora', 'Quinta Roo'],
+            [60.5, 20, 12, 3],
+            'Capacidad Instalada (MW)',
+            ['#f4a261', '#2a9d8f', '#264653', '#8d99ae']
+        );
+
+        // Gráfica para Chile
+        crearGrafica(
+            'energiaChart2',
+            ['Bess el desierto', 'BESS Andes IV', 'Quillagua'],
+            [200, 130, 95],
+            'Capacidad Instalada (MW)',
+            ['#264653', '#264653', '#264653', '#264653']
+        );
+
+
+        // Gráfica para Colombia
+        crearGrafica(
+            'energiaChart3',
+            ['Termozipa', 'Celsia Solar Palmira 2'],
+            [7, 1],
+            'Capacidad Instalada (MW)',
+            ['#8d99ae', '#8d99ae', '#8d99ae', '#8d99ae']
+        );
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <a href="documento.pdf" class="pdf-download">
+        <i class="fas fa-file-pdf"></i> Descargar documento
+    </a>
+
+    <style>
+        .pdf-download {
+            color: #d33;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .pdf-download:hover {
+            text-decoration: underline;
+        }
+    </style> -->
+
+
+
+    <footer>
+        <p class="mb-4">&copy; 2025 Almacenamiento Eléctrico Latam. Todos los derechos reservados.</p>
+        <div class="social-links flex justify-center gap-4">
+            <a href="https://www.facebook.com/EnergyStorageLatam" target="_blank" aria-label="Facebook"
+                class="hover:opacity-80">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="24">
+            </a>
+            <a href="https://www.linkedin.com/company/almacenamiento-el%C3%A9ctrico-latam/?viewAsMember=true"
+                target="_blank" aria-label="LinkedIn" class="hover:opacity-80">
+                <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn" width="24">
+            </a>
+        </div>
+    </footer>
+
+
+    <script>
+        // Animación al hacer scroll
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Para dispositivos móviles: convertir hover en click
+        if (window.innerWidth <= 768) {
+            const dropdowns = document.querySelectorAll('.dropdown');
+
+            dropdowns.forEach(dropdown => {
+                const button = dropdown.querySelector('button');
+
+                if (button) {
+                    button.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        // Cerrar otros dropdowns abiertos
+                        dropdowns.forEach(d => {
+                            if (d !== dropdown) {
+                                d.classList.remove('active');
+                            }
+                        });
+
+                        // Alternar el dropdown actual
+                        dropdown.classList.toggle('active');
+                    });
+                }
+            });
+
+            // Cerrar dropdowns al hacer click fuera
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.dropdown')) {
+                    dropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
