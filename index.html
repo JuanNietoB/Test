@@ -7,16 +7,6 @@
     <link rel="icon" type="image/png" href="fav_256_01.png">
     <title>Almacenamiento Eléctrico Latam</title>
 
-
-
-
-
-
-
-
-
-
-    <!-- Hojas de estilo externas -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -35,33 +25,36 @@
             line-height: 1.6;
         }
 
-        /* .hero {
-            background: url('https://source.unsplash.com/1600x600/?renewable-energy') no-repeat center center/cover;
-            color: black;
-            padding: 5em 2em;
-            text-align: center;
-        } */
+        /* Estilos generales para imágenes */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Evita espacio extra debajo de las imágenes */
+        }
 
+        /* Estilos del Hero Section */
         .hero {
             background: url("cover3.png") no-repeat center center/cover;
             color: black;
             padding: 0.1em 0.1em;
             text-align: center;
+            min-height: 250px; /* Altura mínima para que la imagen de fondo sea visible */
+            display: flex; /* Para centrar contenido si se añade más */
+            align-items: center;
+            justify-content: center;
         }
 
-
+        /* Estilos del "cap" Section (presumo que es un banner o imagen) */
         .cap {
             background: url("Logo_pagina_02.png") no-repeat center center/cover;
             color: black;
             padding: 0.1em 0.1em;
             text-align: center;
+            min-height: 150px; /* Altura mínima para que la imagen de fondo sea visible */
+            display: flex; /* Para centrar contenido si se añade más */
+            align-items: center;
+            justify-content: center;
         }
-
-
-
-
-
-
 
         .section {
             padding: 4em 2em;
@@ -123,7 +116,8 @@
         }
 
         .logo-hero {
-            width: 460px;
+            width: 100%; /* Ahora es fluido por defecto */
+            max-width: 460px; /* Mantiene un ancho máximo en pantallas grandes */
             height: auto;
             margin-top: 1em;
         }
@@ -143,6 +137,7 @@
             font-size: 0.9em;
         }
 
+        /* Ajuste del logo del header */
         .logo {
             width: 60px;
             height: 60px;
@@ -185,13 +180,14 @@
             color: #007f5f;
         }
 
+        /* Comportamiento de hover para desktop */
         .dropdown:hover .dropdown-content {
             display: block;
             opacity: 1;
             visibility: visible;
         }
 
-        .dropdown>a::after {
+        .dropdown>button::after { /* Cambiado de 'a' a 'button' para el indicador */
             content: "▼";
             font-size: 0.6em;
             margin-left: 5px;
@@ -199,44 +195,83 @@
             transition: transform 0.3s;
         }
 
-        .dropdown:hover>a::after {
+        .dropdown:hover>button::after { /* Cambiado de 'a' a 'button' */
             transform: rotate(180deg);
         }
 
-        /* Estilos para móviles */
+        /* Estilos para móviles (max-width: 768px) */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
                 text-align: center;
+                padding: 1em; /* Ajuste el padding para móviles */
             }
 
-            nav ul {
+            nav ul { /* Esto no se aplica directamente porque usas flex en la nav, pero es buena práctica */
                 flex-direction: column;
                 gap: 0.5em;
                 margin-top: 1em;
             }
-
-            .dropdown-content {
-                position: static;
-                box-shadow: none;
-                width: 100%;
+            
+            .logo { /* Ajusta el tamaño del logo del header para móviles */
+                width: 40px;
+                height: 40px;
             }
 
+            .hero, .cap {
+                min-height: 150px; /* Ajusta la altura mínima para imágenes de fondo en móviles */
+            }
+
+            .section {
+                padding: 2em 1em; /* Reduce el padding de las secciones en móviles */
+            }
+
+            h3 {
+                font-size: 1.5em; /* Reduce el tamaño de los encabezados en móviles */
+            }
+
+            .quote-source {
+                font-size: 0.8em; /* Reduce el tamaño de la fuente de la cita */
+            }
+
+            /* Comportamiento del dropdown para móviles (activado por JavaScript) */
+            .dropdown-content {
+                position: static; /* Ocupa espacio normal en el flujo del documento */
+                box-shadow: none; /* Elimina la sombra */
+                width: 100%; /* Ocupa todo el ancho disponible */
+                border-radius: 0; /* Sin bordes redondeados para que se vea más integrado */
+                border-top: 1px solid #ddd; /* Añade un borde superior */
+            }
+
+            /* Ocultar dropdown en móvil por defecto y activarlo con JS */
             .dropdown:hover .dropdown-content {
-                display: none;
+                display: none; /* Asegura que el hover no abra el menú en móviles */
             }
 
             .dropdown.active .dropdown-content {
-                display: block;
+                display: block; /* Se muestra cuando la clase 'active' está presente (vía JS) */
                 opacity: 1;
                 visibility: visible;
+            }
+
+            .dropdown>button::after { /* Quita el indicador de flecha en móviles si lo deseas */
+                display: none; 
+            }
+        }
+
+        /* Media query para pantallas muy pequeñas (opcional, si es necesario un control más fino) */
+        @media (max-width: 480px) {
+            .hero {
+                min-height: 180px; /* Ajuste aún más para pantallas muy pequeñas si es necesario */
+            }
+            .cap {
+                min-height: 100px;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Barra superior -->
     <header class="bg-green-900 text-white p-4">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center">
@@ -247,14 +282,12 @@
                 </div>
             </div>
             <div class="flex flex-col sm:flex-row gap-2">
-                <!-- <a href="#" class="bg-white text-blue-900 px-4 py-2 rounded font-medium text-center">Open Live View</a> -->
                 <a href="Contacto_01.html"
                     class="border border-white px-4 py-2 rounded font-medium text-center">Contacto</a>
             </div>
         </div>
     </header>
 
-    <!-- Barra de navegación -->
     <nav class="bg-white shadow-md">
         <div class="container mx-auto flex flex-wrap justify-center gap-1 p-2">
 
@@ -268,7 +301,6 @@
                 Sobre nosotros
             </a>
 
-            <!-- Menú Product -->
             <div class="dropdown relative">
                 <button
                     class="px-4 py-2 font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md flex items-center">
@@ -279,110 +311,21 @@
                 </button>
                 <div class="dropdown-content">
                     <a href="Reporte_01.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        <i class="fas fa-chart-line mr-2"></i> Graficas
+                        <i class="fas fa-chart-line mr-2"></i> Gráficas
                     </a>
-                    <!-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        <i class="fas fa-tachometer-alt mr-2"></i>w
-                    </a> -->
                     <a href="Reporte_01.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                         <i class="fas fa-trophy mr-2"></i> Reportes
                     </a>
-                    <!-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        <i class="fas fa-map-marked-alt mr-2"></i> Balancing Authority Map
-                    </a> -->
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                         <i class="fas fa-database mr-2"></i> Base de datos
                     </a>
-                    <!-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        <i class="fas fa-bell mr-2"></i> Noticias
-                    </a> -->
-                    <!-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                            <i class="fas fa-search mr-2"></i> Buscar
-                        </a> -->
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        <!-- <i class="fas fa-book mr-2"></i> Data Catalog -->
-                    </a>
                 </div>
             </div>
-
-
-
-            <!-- Menú Price Map -->
-            <!-- <div class="dropdown relative">
-                <button
-                    class="px-4 py-2 font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md flex items-center">
-                    Tendencias
-                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
-                <div class="dropdown-content">
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        <i class="fas fa-map mr-2"></i> Regional View
-                    </a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        <i class="fas fa-bolt mr-2"></i> Nodal Prices
-                    </a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        <i class="fas fa-history mr-2"></i> Historical Trends
-                    </a>
-                </div>
-            </div> -->
-
-            <!-- Menú Live
-            <a href="#" class="px-4 py-2 font-medium text-blue-600 hover:bg-gray-100 rounded-md">
-                Live
-            </a> -->
-
-            <!-- Menú Dashboards -->
-
-
-            <!-- Menú Alerts -->
-            <!-- <div class="dropdown relative">
-                <button
-                    class="px-4 py-2 font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md flex items-center">
-                    Alerts
-                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button> -->
-            <!-- <div class="dropdown-content">
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        <i class="fas fa-exclamation-triangle mr-2"></i> Price Alerts
-                    </a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        <i class="fas fa-chart-bar mr-2"></i> Load Alerts
-                    </a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        <i class="fas fa-bolt mr-2"></i> Outage Alerts
-                    </a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        <i class="fas fa-cog mr-2"></i> Alert Settings
-                    </a>
-                </div> -->
-        </div>
-
-        <!-- Menú Record Tracker
-            <a href="#" class="px-4 py-2 font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md">
-                Record Tracker
-            </a>
-
-            < Menú Graph Builder -->
-        <!-- <a href="#" class="px-4 py-2 font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md">
-                Graph Builder
-            </a> -->
         </div>
     </nav>
-    <!-- #595e5e -->
-    <!-- Contenido principal -->
     <main>
         <section class="hero">
-            <!-- <h2 class="text-2xl md:text-3xl font-bold mb-4 text-[#4b5a5b ]">Impulsamos decisiones con datos</h2> -->
             <p class="text-lg mb-20 text-[#95c8cd]">.</p>
-            <!-- <div class="flex flex-wrap justify-center gap-4"> -->
-            <!-- <img src="Logo_pagina_02.png" alt="Logo empresa" class="logo-hero"> -->
-            <!-- <img src="Logo_pagina_02.png" alt="Logo empresa" class="logo-hero"> -->
-            </div>
         </section>
 
         <section class="py-8 text-center">
@@ -400,28 +343,15 @@
             <p class="text-lg mb-20 text-[#95c8cd]">.</p>
         </section>
 
-
         <section id="sobre" class="section">
             <h2 class="text-2xl font-bold mb-4">Datos curiosos</h2>
             <p class="text-lg">
-
                 🌎 Las baterías globales evitarán 30 millones de toneladas de CO₂ anuales para 2030.
-
+                <br><br>
                 ⚡ La velocidad de respuesta: Las baterías activan su energía en 20 milisegundos (vs. 10 minutos de una
-                turbina).</p>
+                turbina).
+            </p>
         </section>
-
-        <!-- <section id="contacto" class="section">
-            <h2 class="text-2xl font-bold mb-4">Contacto</h2>
-            <form class="max-w-md mx-auto">
-                <input type="text" placeholder="Nombre" required class="w-full" />
-                <input type="email" placeholder="Correo electrónico" required class="w-full" />
-                <textarea placeholder="¿En qué podemos ayudarte?" required class="w-full"></textarea>
-                <button type="submit" class="text-white bg-green-700 hover:bg-green-800 font-bold py-2 px-4 rounded">
-                    Enviar
-                </button>
-            </form>
-        </section> -->
     </main>
 
     <footer>
@@ -453,7 +383,8 @@
             observer.observe(section);
         });
 
-        // Para dispositivos móviles: convertir hover en click
+        // Para dispositivos móviles: convertir hover en click para dropdowns
+        // Se ejecuta solo si el ancho de la ventana es menor o igual a 768px
         if (window.innerWidth <= 768) {
             const dropdowns = document.querySelectorAll('.dropdown');
 
@@ -462,7 +393,8 @@
 
                 if (button) {
                     button.addEventListener('click', function (e) {
-                        e.preventDefault();
+                        e.preventDefault(); // Previene la acción por defecto del botón
+                        
                         // Cerrar otros dropdowns abiertos
                         dropdowns.forEach(d => {
                             if (d !== dropdown) {
@@ -470,13 +402,13 @@
                             }
                         });
 
-                        // Alternar el dropdown actual
+                        // Alternar la clase 'active' para el dropdown actual
                         dropdown.classList.toggle('active');
                     });
                 }
             });
 
-            // Cerrar dropdowns al hacer click fuera
+            // Cerrar dropdowns al hacer click fuera de ellos
             document.addEventListener('click', function (e) {
                 if (!e.target.closest('.dropdown')) {
                     dropdowns.forEach(dropdown => {
